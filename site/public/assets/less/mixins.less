@@ -1,0 +1,61 @@
+.button-variant(@color; @background; @border) {
+	color: @color;
+	background-color: @background;
+	border-color: @border;
+
+	&:hover,
+	&:focus,
+	&:active,
+	&.active,
+	.open .dropdown-toggle& {
+		color: @color;
+		background-color: darken(@background, 10%);
+        border-color: darken(@border, 12%);
+	}
+	&:active,
+	&.active,
+	.open .dropdown-toggle& {
+		background-image: none;
+	}
+	&.disabled,
+	&[disabled],
+	fieldset[disabled] & {
+		&,
+		&:hover,
+		&:focus,
+		&:active,
+		&.active {
+			background-color: @background;
+			border-color: @border;
+		}
+	}
+
+	.badge {
+		color: @background;
+		background-color: @color;
+	}
+}
+
+.transition (@prop: all, @time: 1s, @ease: linear) 
+{
+	-webkit-transition: @prop @time @ease;
+	-moz-transition: @prop @time @ease;
+	-o-transition: @prop @time @ease;
+	transition: @prop @time @ease;
+}
+
+.border-radius (@radius: 5px) 
+{
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.drop-shadow (@x,@y,@spread,@alpha)
+{
+	-webkit-filter:drop-shadow(@x @y @spread @alpha);
+	-moz-filter:drop-shadow(@x @y @spread @alpha);
+	-ms-filter:drop-shadow(@x @y @spread @alpha);
+	-o-filter:drop-shadow(@x @y @spread @alpha);
+	filter:drop-shadow(@x @y @spread @alpha);
+}
