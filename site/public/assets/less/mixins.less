@@ -7,6 +7,14 @@
   	text-overflow: ellipsis;
 }
 
+.user-select(@props)
+{
+    -webkit-user-select: @props;
+    -moz-user-select: @props;
+    -ms-user-select: @props;
+    user-select: @props;
+}
+
 .text-shadow (@string: 0 1px 3px rgba(0, 0, 0, 0.25)) 
 {
 	text-shadow: @string;
@@ -20,6 +28,13 @@
 .inner-shadow (@x: 0, @y: 2px, @blur: 4px, @spread: 0, @color: rgba(0, 0, 0, 0.3)) 
 {
 	box-shadow: inset @x @y @blur @spread @color;
+}
+
+.filter(@filter-rule)
+{
+	-webkit-filter:@filter-rule;
+	-moz-filter:@filter-rule;
+	filter:@filter-rule;
 }
 
 .drop-shadow-filter(@x: 0, @y: 2px, @blur: 4px, @color: rgba(0, 0, 0, 0.3))

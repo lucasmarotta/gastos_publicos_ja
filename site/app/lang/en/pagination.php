@@ -13,8 +13,7 @@ return array(
 	|
 	*/
 
-	'previous' => '&laquo; Previous',
-
-	'next'     => 'Next &raquo;',
+	'previous' => '<span class="vue-left"></span>',
+	'next'     => '<span class="vue-right"></span>',
 
 );

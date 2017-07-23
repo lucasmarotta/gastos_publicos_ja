@@ -62,6 +62,90 @@
 
 }
 
+.btn
+{
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    background:@mute-color;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 10px 15px;
+    font-size: 15px;
+    color:white;
+    border: none;
+    .border-radius(4px);
+    .user-select(none);
+    .transition(background .3s);
+
+    &:hover, &:focus, &:active
+    {
+        background: darken(@mute-color, 10%);
+    }
+}
+
+.pagination
+{
+    margin: 0 auto;
+    display: table;
+    margin-top: 50px;
+    .border-radius(4px);
+    
+    > li
+    {
+        display: inline;
+        
+        a, span
+        {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: @alt-color;
+            margin-left: -1px;
+            .transition(all .3s);
+            cursor: pointer;
+
+            &:hover, &:focus, &:active
+            {
+                background-color: darken(@alt-color, 10%);
+            }
+        }
+        
+        &:first-child > a, &:first-child > span
+        {
+            margin-left: 0;
+            .border-radiuses(0, 0, 4px, 4px);           
+        }
+
+        &:last-child > a, &:last-child > span
+        {
+            margin-left: 0;
+            .border-radiuses(4px, 4px, 0, 0);           
+        }
+    }
+
+    .disabled span
+    {
+        background: lighten(@alt-color, 10%);
+        cursor: not-allowed;
+
+        &:hover, &:focus, &:active
+        {
+            background: lighten(@alt-color, 10%);
+        }       
+    }
+
+    .active span
+    {
+        background-color: darken(@alt-color, 10%);       
+    }
+
+}
+
 .input-group
 {
     position: relative;
@@ -71,7 +155,6 @@
 	{
 		position: relative;
 	    z-index: 2;
-	    float: left;
 	    margin-bottom: 0;
 	    display: block;
 	    width: 100%;
@@ -88,17 +171,15 @@
 
     .input-group-icon
     {
-	    width: 1%;
 	    display: table-cell;
 	    white-space: nowrap;
 	    vertical-align: middle;
 	    padding: 10px 15px;
-	    font-size: 15px;
+	    font-size: 27px;
 	    font-weight: normal;
 	    line-height: 1;
-	    color: @mute-color;
+	    color: white;
 	    text-align: center;
-	    .border-radius(4px);
     	&:first-child
     	{
     		border-right:0;
