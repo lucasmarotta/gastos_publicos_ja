@@ -15,6 +15,7 @@ body
 	font-size: 15px;
 	color:@font-color;
 	position:relative;
+	background:@bg-color;
 }
 
 h1, h2, h3, h4, h5, h6 
@@ -24,6 +25,16 @@ h1, h2, h3, h4, h5, h6
     font-weight: 700;
     margin-top: 18px;
     margin-bottom: 18px;
+}
+
+section
+{
+    padding: 100px 0 50px;
+}
+
+.default-section
+{
+    margin-top: 50px;
 }
 
 .navbar
@@ -146,6 +157,111 @@ footer
 	}
 }
 
+.section-title
+{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align:center;
+
+    h2
+    {
+        margin: 0;
+        font-size: 30px;
+    }
+
+    .section-title-icon
+    {
+        max-width: 250px;
+        margin: 10px auto 40px;
+        height: 35px;
+
+        hr
+        {
+            width: 39%;
+            height: 5px;
+            background: @font-color;
+            .border-radius(15px);
+            border: none;
+            float:left;
+            margin-top: 21px;
+            margin-bottom: 21px;
+        }
+
+        span
+        {
+            font-size: 35px;
+            margin: 5px 10px;
+            color: @font-color;
+            float:left;
+        }
+    }
+}
+
+.obra-container
+{
+    color: @font-color;
+    font-size: 17px;
+    margin-bottom: 15px;
+    display: table;
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    .obra-uf
+    {
+	    font-size: 100px;
+	    float: left;
+	    margin-right: 7px;
+	    .text-shadow(2px 1px 5px rgba(0, 0, 0, 0.9));
+    }
+
+    .obra-info
+    {
+	    float: left;
+	    width: 80%;
+	    margin-top: 10px;
+	    > *
+	    {
+	    	margin: 4px;
+	    }
+	    h4
+	    {
+	    	text-transform: initial;
+	    }
+	    	    	
+    }
+
+    .obra-social-counter
+    {
+		font-size: 19px;
+    }
+}
+
+.brasil-map
+{
+	svg
+	{
+	    max-width: 60%;
+	    margin: 0 auto;
+	    display: block;
+		.drop-shadow-filter(0px, 0px, 6px, rgba(0, 0, 0, 0.7));
+
+		path
+		{
+		    fill: @alt-color;
+		    .transition(all .3s ease-in-out);
+		}
+
+		.highlight-uf path
+		{
+			fill: darken(@alt-color, 15%);
+		}	
+	}
+}
+
 
 /* ==========================================================================
     HOME
@@ -211,7 +327,16 @@ header
     }
 }
 
+.obra-section
+{
+    background: @bg-color url(../img/mais_vistas_bg.jpg);
+    background-size: cover;
+}
 
-
+.social-section
+{
+	background: #F7FFFF url("../img/social_media.jpg");
+	background-size: 1500px 1498px;
+}
 
 @import "responsive";

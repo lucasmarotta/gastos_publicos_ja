@@ -22,4 +22,11 @@
 		</div>
 	</section>
 
+    <!--
+        <div class="scroll-top page-scroll visible-xs visible-sm">
+            <a class="btn btn-primary icon-up" href="#page-top">
+            </a>
+        </div>    
+    -->  
+
 </footer>
