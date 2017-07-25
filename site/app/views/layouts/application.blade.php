@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
     {{ HTML::style('assets/css/main.min.css') }}
+    {{ HTML::script('assets/js/jraw.js') }}
 
 </head>
 <body id="page-top" class="index">
@@ -19,16 +20,20 @@
     @include('layouts/_navigation')
     <main>@yield('content')</main>
     @include('layouts/_footer')
+    
+    
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <!--
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
-    {{ HTML::script('assets/js/classie.js') }}
-    {{ HTML::script('assets/js/cbpAnimatedHeader.js') }}
-    {{ HTML::script('assets/js/jqBootstrapValidation.js') }}
-    {{ HTML::script('assets/js/contact_me.js') }}
-    {{ HTML::script('assets/js/main.js') }}
+        {{ HTML::script('assets/js/classie.js') }}
+        {{ HTML::script('assets/js/cbpAnimatedHeader.js') }}
+        {{ HTML::script('assets/js/jqBootstrapValidation.js') }}
+        {{ HTML::script('assets/js/contact_me.js') }}
+        {{ HTML::script('assets/js/main.js') }}
+    -->
 
 </body>
 </html>
