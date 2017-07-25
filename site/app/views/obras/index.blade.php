@@ -1,14 +1,14 @@
 @extends('layouts.application')
 @section('content')
 
-<section class="obra-section">
+<section class="obra-section default-section">
 	
     <div class="container">
         
-        <div class="section-title default-section">
+        <div class="section-title">
             <h2>Lista de Obras</h2>
             <div class="section-title-icon">
-                <hr><span class="vue-location"></span><hr>
+                <hr><span class="vue-forklift"></span><hr>
             </div>
         </div>
 		

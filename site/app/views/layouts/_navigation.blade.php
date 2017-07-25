@@ -1,7 +1,7 @@
 <nav class="navbar">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#page-top">
+			<a class="navbar-brand" href="/#page-top">
 				{{ HTML::image('/assets/img/logo.png', "Obras Públicas Já", ['class' => 'img-responsive', 'width' => 336, 'height' => 35]) }}
 			</a>
 		</div>
@@ -25,7 +25,7 @@
 				@endif
             </li>
             <li class="page-scroll {{ Route::current()->getName() == 'obras.index' ? 'active': '' }}">
-                <a href="obras">Obras</a>
+                <a href="/obras">Obras</a>
             </li>
         </ul>
 	</div>

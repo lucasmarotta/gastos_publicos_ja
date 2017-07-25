@@ -53,7 +53,7 @@ class ObrasController extends BaseController {
 		if ($obra->dataConclusao != NULL && $obra->dataConclusao != "0000-00-00")
 			$obra->dataConclusao = $finished_date = Carbon::createFromFormat('Y-m-d', $obra->dataConclusao);
 
-		$barra_de_progresso = [
+		$progressBar = [
 			'status' => "",
 			'blue_bar' => "0",
 			'red_bar' => "0",
@@ -67,17 +67,17 @@ class ObrasController extends BaseController {
 				$totalInDays = $start_date->diff($finished_date)->days;
 				$estimated = $start_date->diff($estimate_date)->days;
 				
-				$barra_de_progresso['status'] = "Concluída dentro do tempo previsto";
-				$barra_de_progresso['blue_bar'] = round($totalInDays / $estimated * 100);
+				$progressBar['status'] = "Concluída dentro do tempo previsto";
+				$progressBar['blue_bar'] = round($totalInDays / $estimated * 100);
 
 			} else {
 
 				$totalInDays = $start_date->diff($finished_date)->days;
 				$estimated = $start_date->diff($estimate_date)->days;
 
-				$barra_de_progresso['status'] = "Concluída com atrasos";
-				$barra_de_progresso['blue_bar'] = round($estimated / $totalInDays * 100);
-				$barra_de_progresso['red_bar'] = 100 - $barra_de_progresso['blue_bar'];
+				$progressBar['status'] = "Concluída com atrasos";
+				$progressBar['blue_bar'] = round($estimated / $totalInDays * 100);
+				$progressBar['red_bar'] = 100 - $progressBar['blue_bar'];
 
 			}
 		} else {
@@ -86,20 +86,20 @@ class ObrasController extends BaseController {
 				$totalInDays = $start_date->diff($today)->days;
 				$estimated = $start_date->diff($estimate_date)->days;
 				
-				$barra_de_progresso['status'] = "Em andamento";
-				$barra_de_progresso['blue_bar'] = round($totalInDays / $estimated * 100);
+				$progressBar['status'] = "Em andamento";
+				$progressBar['blue_bar'] = round($totalInDays / $estimated * 100);
 			} else {
 
 				$totalInDays = $start_date->diff($today)->days;
 				$estimated = $start_date->diff($estimate_date)->days;
 
-				$barra_de_progresso['status'] = "Atrasada";
-				$barra_de_progresso['blue_bar'] = round($estimated / $totalInDays * 100);
-				$barra_de_progresso['red_bar'] = 100 - $barra_de_progresso['blue_bar'];
+				$progressBar['status'] = "Atrasada";
+				$progressBar['blue_bar'] = round($estimated / $totalInDays * 100);
+				$progressBar['red_bar'] = 100 - $progressBar['blue_bar'];
 			}
 		}
 
-		return View::make('obras.show', compact('obra', 'barra_de_progresso'));
+		return View::make('obras.show', compact('obra', 'progressBar'));
 	}
 
 	public function getRandomObra()
