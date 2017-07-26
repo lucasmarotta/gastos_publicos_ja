@@ -25,6 +25,106 @@
 			JRAW.isReady = true;
 			this.call();
     	},
+    	Ajax = function(request) {
+
+    		//Atributos padrão
+			var self = this,
+				defaultRequest = {
+				async:true,
+				url:undefined,
+				cache:false,
+				cors: true,
+				type:'GET',
+				data:null,
+				charset:"utf-8",
+				dataType:"text",
+				timeout:0,
+				credentials:null,
+				success:function(){},
+				fail:function(){},
+				done:function(){}		
+			};
+			this.xhr = null;
+
+			//Inicializa as configurações do Ajax
+			this.init = function(request) {
+				if(type(request) == "object") {
+					this.request = JRAW.extend(defaultRequest, request);
+				} else {
+					this.request = null;
+				}
+			};
+
+			//Envia a requisição HTTP
+			this.send = function () 
+			{
+				this.xhr = new XMLHttpRequest();
+				var mimeType;
+				switch(this.request.dataType)
+				{
+					case "text":
+					{
+						mimeType = "text/plain";
+						break;
+					}
+
+					case "xml":
+					{
+						mimeType = "application/xml";
+						break;
+					}
+
+					case "html":
+					{
+						mimeType = "text/html";
+						break;
+					}
+
+					case "json":
+					{
+						mimeType = "application/json";
+						break;
+					}
+				}
+				mimeType += " charset="+this.request.charset;
+				if(this.xhr.overrideMimeType) this.xhr.overrideMimeType(mimeType);
+				if(this.request.cache)
+					this.request.url += ((/\?/).test(this.request.url) ? "&" : "?") + (new Date()).getTime();
+				if(this.request.credentials) 
+					this.xhr.open(this.request.type, this.request.url, this.request.async, this.request.credentials.user, this.request.credentials.password);
+				else 
+					this.xhr.open(this.request.type, this.request.url, this.request.async);
+
+				if(this.request.cors) {
+					this.xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+					this.xhr.setRequestHeader('Access-Control-Allow-Origin', 'ipinfo.io');
+				}
+
+				this.xhr.send(this.request.data);
+				if(this.request.async) {
+					this.xhr.onreadystatechange = function() {
+						if(self.xhr.readyState == 4) self.getResponse();
+					}
+				}
+				else this.getResponse();
+			};
+
+			//Obtem a resposta da requisição HTTP
+			this.getResponse = function() 
+			{
+				var response = {
+					readyState:this.xhr.readyState,
+					status:this.xhr.status,
+					data:(this.request.dataType == "xml") ? this.xhr.responseXML:this.xhr.responseText,
+					header:this.xhr.getAllResponseHeaders()
+				};
+				if(this.xhr.status.toString().lastIndexOf("2",0) === 0 || this.xhr.status.toString().lastIndexOf("3",0) === 0)
+					this.request.success(response);
+				else this.request.fail(response);
+				this.request.done(response);
+			};
+			this.init(request);
+    	},
     	JRAW = function(selector, context) {
 			return new JRAW.fn.init(selector, context);
 		};
@@ -55,24 +155,44 @@
 			return JRAW.each(this, callback);
 		},
 
-		find: function(selector) {
-
+		attr: function(name, value) {
+			if(value !== undefined) {
+				JRAW.each(this, function(){
+					if(this.setAttribute) {
+						this.setAttribute(name, value);
+					}
+				});
+				return this;
+			} else {
+				if(this.getAttribute) {
+					return this.getAttribute(name);
+				}
+				return null;
+			}
 		}
 	};
 
 	//Método para extender o objeto JRAW
 	JRAW.extend = JRAW.fn.extend = function() {
-		var options, name, copy;
-		options = arguments[0];
-		if ( options != null && type(options) === "object" ) {
-			for ( name in options ) {
-				copy = options[name];
-				if(copy !== undefined) {
-					this[name] = options[name];
+		var options, name, copy, i = 1, target = arguments[0] || {};
+
+		if(i === arguments.length) {
+			target = this;
+			i--;
+		}
+
+		for( ; i < arguments.length; i++) {
+			options = arguments[i];
+			if ( options != null && type(options) === "object" ) {
+				for ( name in options ) {
+					copy = options[name];
+					if(copy !== undefined) {
+						target[name] = options[name];
+					}
 				}
 			}
 		}
-		return this;
+		return target;
 	};
 
 	//Definição de atributos estáticos
@@ -96,13 +216,38 @@
 			return obj;
 		},
 
-		getJson: function(request) {
+		getJSON: function(request) {
+			var ajax = new Ajax(request);
+			if(ajax.request != null) {
+				var success = ajax.request.success, fail = ajax.request.fail;
+				JRAW.extend(ajax.request, {
+					tyoe: 'GET',
+					dataType: 'json',
+					async: true,
+					success: function(response) {
+						var jsonData = JSON.parse(response.data);
+						if(jsonData) {
+							success(jsonData);
+						} else {
+							fail("failed to parse json");
+						}
 
+					},
+					fail: function(response) {
+						fail(response);
+					}
+				});
+				ajax.send();
+			}
 		},
 
 		ajax: function(request) {
-
-		}
+			var ajax = new Ajax(request);
+			if(ajax.request != null) {
+				ajax.send();
+			}
+			return this;
+		},
 	});
 
 	//Método que inicializa o JRAW
@@ -138,10 +283,4 @@
 	rootJRAW = JRAW(document);
 	window.JRAW = window.$ = JRAW;
 	return JRAW;
-});
-
-$(function() {
-	$(".container").each(function(){
-		console.log(this);
-	});
 });
