@@ -5,15 +5,52 @@
 $(function(){
 
     var footerYear = $(".footer-year");
-    footerYear.html(footerYear.html()+" "+(new Date()).getFullYear());
-
     $.getJSON({ url: "https://ipinfo.io/json",
         success: function(response) {
             $(".state-search .input-group-field").attr("placeholder", "Um estado (ex: "+response.region+")");
         }
     });
 
+    var ip = null;
+    $.ajax({ url: "https://ipinfo.io/ip",
+        success: function(response) {
+            if(response.data.length) {
+                ip = response.data;
+                $.getJSON({ url: "http://api.worldweatheronline.com/premium/v1/tz.ashx",
+                    data: { 
+                        key: 'adc6fbb0fcdd4dcb81f201701172708',
+                        q: ip,
+                        format: 'json',
+                    },
+                    success: function(response) {
+                        if(response) {
+                            var date = dataAtualFormatada(response.data.time_zone[0].localtime);
+                            footerYear.html(footerYear.html()+" - "+date);
+                        }
+                    }
+                });
+            }
+        }
+    });
+
 });
+
+
+function dataAtualFormatada(data)
+{
+     var data = new Date(data);
+     var dia = data.getDate();
+     if (dia.toString().length == 1)
+       dia = "0"+dia;
+     var mes = data.getMonth()+1;
+     if (mes.toString().length == 1)
+       mes = "0"+mes;
+     var ano = data.getFullYear();
+     var hora = data.getHours();
+     var min = data.getMinutes();
+
+     return dia+"/"+mes+"/"+ano+" "+hora+":"+min;
+ }
 
 /*
     if($(".brasil-map").length > 0)
