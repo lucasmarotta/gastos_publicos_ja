@@ -199,7 +199,11 @@
 
 		//Retorna um elemento do JRAW
 		get: function(index) {
-			return this;
+			if(this.length-1 >= index) {
+				return this[index];
+			} else {
+				return null;
+			}
 		},
 
 		//Navega por todos elementos de JRAW e executa um callback

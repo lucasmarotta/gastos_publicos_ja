@@ -7,21 +7,9 @@ $(function(){
     var footerYear = $(".footer-year");
     footerYear.html(footerYear.html()+" "+(new Date()).getFullYear());
 
-    $.ajax({ url: "https://ipinfo.io/region",
+    $.getJSON({ url: "https://ipinfo.io/json",
         success: function(response) {
-            if(response.data.length) {
-                $(".state-search .input-group-field").attr("placeholder", "Um estado (ex: "+response.data+")");
-            }
-        }
-    });
-
-    $.ajax({url:"https://transparencia.es.gov.br/Api/Despesa/ListarOrgaos?ano=2017&numeroPagina=1",
-        type:'xml',
-        success:function(response){
-            console.log(response);
-        },
-        fail:function(response) {
-            console.log(response);
+            $(".state-search .input-group-field").attr("placeholder", "Um estado (ex: "+response.region+")");
         }
     });
 
