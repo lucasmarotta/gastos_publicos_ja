@@ -11,6 +11,8 @@
 |
 */
 
+$app->get('twitter', 'TwitterController@index');
+
 $app->get('/', function () use ($app) {
     return $app->version();
 });

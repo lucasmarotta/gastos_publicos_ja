@@ -43,7 +43,7 @@
 				defaultRequest = {
 				async:true,
 				url:undefined,
-				cache:false,
+				cache:true,
 				cors: false,
 				type:'GET',
 				data:null,
@@ -100,8 +100,15 @@
 
 				mimeType += " charset="+this.request.charset;
 				if(this.xhr.overrideMimeType) this.xhr.overrideMimeType(mimeType);
-				if(this.request.cache) this.request.url += ((/\?/).test(this.request.url) ? "&" : "?") + (new Date()).getTime();
 				
+				//Serializa os dados na URL
+				if(this.request.data != null && this.request.type == 'GET') {
+					this.request.url += ((/\?/).test(this.request.url) ? "&" : "?") + JRAW.urlEncode(this.request.data);
+				}
+
+				//Para não realizar cache adicionamos um timestamp
+				if(!this.request.cache) this.request.url += ((/\?/).test(this.request.url) ? "&" : "?") + (new Date()).getTime();
+
 				//Suporte para basic auth
 				if(this.request.credentials) {
 					this.xhr.open(this.request.type, this.request.url, this.request.async, this.request.credentials.user, this.request.credentials.password);
@@ -115,7 +122,17 @@
 					this.xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
 				}
 
-				this.xhr.send(this.request.data);
+				if(this.request.data != null) {
+					if(this.request.type == 'POST') {
+						this.xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+						this.xhr.send(JRAW.urlEncode(this.request.data));
+					} else if(this.request.type == 'GET') {
+						this.xhr.send();
+					}
+				} else {
+					this.xhr.send();
+				}
+
 				if(this.request.async) {
 					this.xhr.onreadystatechange = function() {
 						if(self.xhr.readyState == 4) self.getResponse();
@@ -125,8 +142,7 @@
 			};
 
 			//Obtem a resposta da requisição HTTP
-			this.getResponse = function() 
-			{
+			this.getResponse = function() {
 				var response = {
 						readyState:this.xhr.readyState,
 						status:this.xhr.status,
@@ -396,6 +412,20 @@
 			}
 			first.length = i;
 			return first;
+		},
+
+		//Serializa um objeto para URL Encode
+		urlEncode: function(obj, prefix) {
+			var str = [], p;
+			for(p in obj) {
+				if (obj.hasOwnProperty(p)) {
+					var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+					str.push((v !== null && typeof v === "object") ?
+					serialize(v, k) :
+					encodeURIComponent(k) + "=" + encodeURIComponent(v));
+				}
+			}
+			return str.join("&");
 		},
 
 		//Fabrica um array em results
