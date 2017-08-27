@@ -1,3 +1,3 @@
-# Obras Públicas Já
+# Gastos Públicos Já
 
-Projeto obras públicas Já (Crawler + Site)
+Projeto Gastos Públicos Já (Serviço + Site)
