@@ -1,13 +1,10 @@
-site/bootstrap/compiled.php
-site/vendor
-site/layout/images
-site/layout/Cópia_de_segurança_de_obras publicas ja.cdr
-site/composer.phar
-site/composer.lock
-site/.env.*.php
-site/.env.php
+service/bootstrap/compiled.php
+service/vendor
+layout/images
+layout/Cópia_de_segurança_de_obras publicas ja.cdr
+service/composer.phar
+service/composer.lock
+service/.env.*.php
+service/.env.php
 .DS_Store
 Thumbs.db
-
-crawler/.gradle/
-crawler/build/
