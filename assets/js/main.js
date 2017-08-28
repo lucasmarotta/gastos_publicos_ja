@@ -50,9 +50,21 @@ $(function(){
             pg:1,
             ano:2017
         },
-        success: function(gastos) {
-            var gastosModel = $(".gastos-model");
-            gastosModel.bindValue("url","http://localhost");
+        success: function(response) {
+            response.gastos.forEach(function(item, index){
+                if(index == 0) {
+                    var gastosModel = $(".gastos-model");
+                    gastosModel.bindValue("url","detalhes.html");
+                    gastosModel.bindValue("gastos-uf","es");
+                    gastosModel.bindValue("gastos-uf","es");
+                    gastosModel.bindValue("gastos-estado-nome", "Espírio Santo");
+                    gastosModel.bindValue("gastos-orgao", item.orgao);
+                    gastosModel.bindValue("gastos-empenhado", item.empenhado);
+                    gastosModel.bindValue("gastos-pago", item.pago);
+                    gastosModel.bindValue("gastos-liquido", item.liquido);
+                    $(".gastos").append(gastosModel.show().get(0));                   
+                }
+            });
         },
         fail: function () {
             console.log("falhou");
