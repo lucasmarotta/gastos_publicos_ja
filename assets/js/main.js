@@ -73,10 +73,10 @@ function dataAtualFormatada(data)
        mes = "0"+mes;
      var ano = data.getFullYear();
      var hora = data.getHours();
-     if(hora.toString().lenght == 1)
+     if(hora.toString().length == 1)
      	hora = "0"+hora;
      var min = data.getMinutes();
-     if(min.toString().lenght == 1)
+     if(min.toString().length == 1)
      	min = "0"+min;
 
      return dia+"/"+mes+"/"+ano+" "+hora+":"+min;
