@@ -33,6 +33,18 @@ $(function(){
         }
     });
 
+    $.getJSON({ url:"http://localhost:8000/twitter",
+        data: {
+            term:"Defensoria Publica Espirito Santo"
+        },
+        success: function(response) {
+            console.log(response);
+        },
+        fail: function () {
+            console.log("falhou");
+        }
+    });
+
     $.getJSON({ url:"http://localhost:8000/gastos/es",
         data: {
             pg:1,
@@ -42,8 +54,8 @@ $(function(){
             var gastosModel = $(".gastos-model");
             gastosModel.bindValue("url","http://localhost");
         },
-        fail: function (response) {
-            console.log(response);
+        fail: function () {
+            console.log("falhou");
         }
     });
 
@@ -61,7 +73,11 @@ function dataAtualFormatada(data)
        mes = "0"+mes;
      var ano = data.getFullYear();
      var hora = data.getHours();
+     if(hora.toString().lenght == 1)
+     	hora = "0"+hora;
      var min = data.getMinutes();
+     if(min.toString().lenght == 1)
+     	min = "0"+min;
 
      return dia+"/"+mes+"/"+ano+" "+hora+":"+min;
  }
