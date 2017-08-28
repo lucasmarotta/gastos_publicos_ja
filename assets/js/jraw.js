@@ -261,6 +261,17 @@
 			return rootJRAW;
 		},
 
+		//Retorna um novo conjunto de JRAW com elementos clonados
+		clone: function() {
+			var newNodes = JRAW();
+			JRAW.each(this, function(){
+				if(isNode(this)) {
+					JRAW.addAll(newNodes, [this.cloneNode(true)]);
+				}
+			});
+			return newNodes;
+		},
+
 		//Adiciona uma classe nos elementos
 		addClass: function(cls) {
 			if(cls !== undefined && type(cls) == "string") {
@@ -278,6 +289,41 @@
 				});
 			}
 			return this;
+		},
+
+		//Obtem as dimensões com o positionamento do objeto em relação ao body
+		getDimension: function() {
+			if(isNode(this[0])) {
+				var bodyRect = bodyJRAW.get(0).getBoundingClientRect(),
+				    elemRect = this[0].getBoundingClientRect();
+				    return {
+				    	width: elemRect.width,
+				    	height: elemRect.height,
+				    	top: elemRect.top - bodyRect.top,
+				    	left: elemRect.left - bodyRect.left
+				    };
+			}
+			return null;			
+		},
+
+		//Obtem a posição de um elemento visível em relação ao body
+		getPosition: function() {
+			if(isNode(this[0])) {
+				var bodyRect = bodyJRAW.get(0).getBoundingClientRect(),
+				    elemRect = this[0].getBoundingClientRect();
+				    return {
+				    	top: elemRect.top - bodyRect.top,
+				    	left: elemRect.left - bodyRect.left
+				    };
+			}
+			return null;			
+		},
+
+		//Define uma posição para todos os elementos
+		setPosition: function(position) {
+			position.top = position.top + "px";
+			position.left = position.left + "px";
+			return JRAW.applyCss(this, position);
 		},
 
 		//Remove uma classe dos elementos
@@ -395,10 +441,15 @@
 			return JRAW.applyCss(this, rules);
 		},
 
+		//Atribui um valor no html com um refência {{name}}
 		bindValue: function(name, value) {
-			return JRAW.each(this, function(){
-				var content = JRAW(this);
-				content.html(content.html().replace("{{"+name+"}}", value));
+			var self = this;
+			return JRAW.each(this.find("[data-bindName='"+name+"']"), function(){
+				var replace = this.getAttribute("data-bindReplace");
+				if(replace) {
+					if(replace == "html") this.innerHTML = value;
+					else this.setAttribute(replace, value);
+				}
 			});
 		}
 
@@ -560,6 +611,7 @@
 	//Torna público todos os métodos de instância definidos em JRAW.fn
 	factory.prototype = JRAW.fn;
 	rootJRAW = JRAW(document);
+	var bodyJRAW = JRAW(document.body);
 
 	//Torna JRAW global
 	global.JRAW = global.$ = JRAW;

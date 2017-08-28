@@ -41,7 +41,29 @@ class GastosController extends Controller
 		return '';
 	}
 
-	public function paginateEs($gastos, $pg, $ano)
+	public function random(Request $request)
+	{
+		$ano = $request->input("ano") ? : "2017";
+		$pg = $request->input("pg") ? : 1;
+		$url = self::ES_URL."?ano=$ano&numeroPagina=1";
+		$context = $this->createContext(["content-type:application/json"]);
+		if($context) {
+			$response = $this->requestGastos($url, $context);
+			if($response) {
+				return $this->getRandomOrgaoEs($response->Orgaos);
+			}
+		}
+		return '';		
+	}
+
+	public function getRandomOrgaoEs($gastos)
+	{
+		$total = count($gastos);
+		$randomKey = rand(0, $total-1);
+		return $gastos[$randomKey]->strNomeUnidadeGestora ? : "";
+	}
+
+	private function paginateEs($gastos, $pg, $ano)
 	{
 		$gastosNew = [];
 		$total = count($gastos);
@@ -59,9 +81,9 @@ class GastosController extends Controller
 			foreach ($orgaos as $key => $value) {
 				$gastosNew["gastos"][] = [
 					"orgao"=>$value->strNomeUnidadeGestora,
-					"empenhado"=>$value->total_emp,
-					"liquido"=>$value->total_liq,
-					"pago"=>$value->total_pg
+					"empenhado"=>number_format($value->total_emp, 2, ',', '.'),
+					"liquido"=>number_format($value->total_liq, 2, ',', '.'),
+					"pago"=>number_format($value->total_pg, 2, ',', '.')
 				];
 			}
 

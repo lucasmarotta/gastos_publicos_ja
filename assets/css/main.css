@@ -101,6 +101,9 @@ textarea {
 .container:after {
   clear: both;
 }
+[hidden] {
+  display: none !important;
+}
 .img-responsive {
   display: block;
   max-width: 100%;
@@ -286,7 +289,7 @@ textarea {
 }
 .numeric {
   font-family: "Lato", "Segoe UI", Helvetica, Arial, sans-serif;
-  font-weight: 700;
+  font-weight: 900;
 }
 .obra-container .br-uf-ac {
   color: #FFD54F;
@@ -560,6 +563,7 @@ footer .footer-copyright {
   max-width: 60%;
   margin: 0 auto;
   display: block;
+  position: relative;
   -webkit-filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.7));
   -moz-filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.7));
   filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.7));
@@ -570,8 +574,73 @@ footer .footer-copyright {
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+.brasil-map svg a {
+  position: relative;
+}
 .brasil-map svg .highlight-uf path {
   fill: #0f7864;
+}
+.brasil-map .tweet {
+  position: absolute;
+  width: 300px;
+  background: #F5FBFF;
+  border-radius: 7px;
+  background-clip: padding-box;
+  border: 3px solid #95AEBF;
+  padding: 15px 10px 10px 15px;
+  -webkit-filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  -moz-filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  z-index: 999;
+  visibility: hidden;
+  will-change: top, left;
+  -webkit-transition: left 0.3s ease-in-out, top 0.3s ease-in-out;
+  -moz-transition: left 0.3s ease-in-out, top 0.3s ease-in-out;
+  transition: left 0.3s ease-in-out, top 0.3s ease-in-out;
+}
+.brasil-map .tweet .tweet-user {
+  width: 100%;
+  height: 28px;
+}
+.brasil-map .tweet .tweet-user * {
+  float: left;
+}
+.brasil-map .tweet .tweet-user h4 {
+  margin: 0;
+  margin-left: 4px;
+  line-height: 28px;
+  width: 230px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.brasil-map .tweet .tweet-user span {
+  font-size: 28px;
+  color: #1DA1F2;
+  margin-right: 3px;
+}
+.brasil-map .tweet:after,
+.brasil-map .tweet:before {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.brasil-map .tweet:after {
+  border-color: rgba(0, 0, 0, 0);
+  border-top-color: #F5FBFF;
+  border-width: 20px;
+  margin-left: -20px;
+}
+.brasil-map .tweet:before {
+  border-color: transparent;
+  border-top-color: #95AEBF;
+  border-width: 24px;
+  margin-left: -24px;
 }
 /* ==========================================================================
     HOME
@@ -636,9 +705,13 @@ header .state-search .input-group-field:-ms-input-placeholder {
   background: #EAE2E0 url(../img/mais_vistas_bg.jpg);
   background-size: cover;
 }
+.gastos-model {
+  display: none;
+}
 .social-section {
   background: #F7FFFF url("../img/social_media.jpg");
   background-size: 1500px 1498px;
+  display: none;
 }
 /* ==========================================================================
     OBRA

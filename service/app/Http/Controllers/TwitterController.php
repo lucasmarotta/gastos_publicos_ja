@@ -2,47 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use TwitterOAuth\Auth\SingleUserAuth as TwitterOAuth;
-use TwitterOAuth\Serializer\ArraySerializer as TwitterSerializer;
+use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Http\Request;
 
 class TwitterController extends Controller
 {
-    private $credentials = [
-        'consumer_key' => 'dLDm9kp0I9raYSUhFraWugjA6',
-        'consumer_secret' => 'UwaVvzZj1BoXNMmBEtebmDZwOfrBeNSUteA2bELHoM3oePl9to',
+    private $app = [
+        'key' => 'dLDm9kp0I9raYSUhFraWugjA6',
+        'secret' => 'UwaVvzZj1BoXNMmBEtebmDZwOfrBeNSUteA2bELHoM3oePl9to',
         'oauth_token' => '737760914825482240-gNw7HOp1tZJZniy83rtf8atzWJl8Ywn',
         'oauth_token_secret' => 'NvsvSzepJg0XuAocSa7O5tUamBXSufRqNg8wE73VNvjpx'
     ];
 
     public function index(Request $request)
     {
-        //$term = "Secretaria Civil";
-        $term = $request->input("term") ? : "Secretaria Civil";
+        $term = $request->input("term") ? : "Espírito Santo";
         $tweet = $this->searchTwitter($term);
-        return ($tweet) ? $tweet:"";
-
+        return ($tweet) ? $tweet:"{}";
     }
 
-    public function api()
-    {
-
-    }
-
-    public function searchTwitter($term)
+    private function searchTwitter($term)
     {
         try {
             $tweet = null;
-            $auth = new TwitterOAuth($this->credentials, new TwitterSerializer());
+            $conn = new TwitterOAuth($this->app["key"], $this->app["secret"], $this->app["oauth_token"], $this->app["oauth_token_secret"]);
             $params = ['q' => $term,
                 'count' => 1,
                 'tweet_mode'=>'extended',
+                'result_type'=>'recent',
                 'locale' => 'pt'
             ];
-            if($auth) {
-                $response = $auth->get('search/tweets', $params);
-                if($response && count($response["statuses"]) > 0) {
-                    $tweet = ["text"=>$response["statuses"][0]["full_text"],"user"=>$response["statuses"][0]["user"]["name"]];
+            if($conn) {
+                $response = $conn->get('search/tweets', $params);
+                if($response && count($response->statuses) > 0) {
+                    $tweet = ["text"=>$response->statuses[0]->full_text,"user"=>"@".$response->statuses[0]->user->name];
                 }
             }
             return $tweet;

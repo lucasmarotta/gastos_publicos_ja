@@ -247,6 +247,7 @@ footer
 	    max-width: 60%;
 	    margin: 0 auto;
 	    display: block;
+	    position:relative;
 		.drop-shadow-filter(0px, 0px, 6px, rgba(0, 0, 0, 0.7));
 
 		path
@@ -255,13 +256,84 @@ footer
 		    .transition(all .3s ease-in-out);
 		}
 
+		a {
+			position:relative;
+		}
+
 		.highlight-uf path
 		{
 			fill: darken(@alt-color, 15%);
 		}	
 	}
-}
 
+	.tweet
+	{
+		position:absolute;
+	    width: 300px;
+		background:@tweet-bg;
+		.border-radius(7px);
+		border: 3px solid @tweet-bg-muted;
+		padding: 15px 10px 10px 15px;
+		.drop-shadow-filter(0, 2px, 8px, rgba(0, 0, 0, 0.3));
+		z-index:999;
+		visibility:hidden;
+		will-change: top, left;
+		.transition-n(left .3s ease-in-out, top .3s ease-in-out);
+		.tweet-user 
+		{
+			width:100%;
+			height:28px;
+			
+			*
+			{
+				float:left;
+			}
+
+			h4 
+			{
+				margin:0;
+				margin-left:4px;
+				line-height:28px;
+				.text-ellipsis(230px);			
+			}
+
+			span
+			{
+				font-size: 28px;
+				color:@twitter-color;
+				margin-right:3px;
+			}
+		}
+
+		&:after, &:before 
+		{
+			top: 100%;
+			left: 50%;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			pointer-events: none;
+		}
+
+		&:after 
+		{
+			border-color: rgba(0, 0, 0, 0);
+			border-top-color: @tweet-bg;
+			border-width: 20px;
+			margin-left: -20px;			
+		}
+
+		&:before 
+		{
+			border-color: transparent;
+			border-top-color: @tweet-bg-muted;
+			border-width: 24px;
+			margin-left: -24px;
+		}
+	}	
+}
 
 /* ==========================================================================
     HOME
@@ -333,10 +405,16 @@ header
     background-size: cover;
 }
 
+.gastos-model
+{
+	display:none;
+}
+
 .social-section
 {
 	background: #F7FFFF url("../img/social_media.jpg");
 	background-size: 1500px 1498px;
+	display:none;
 }
 
 

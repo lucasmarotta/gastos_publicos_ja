@@ -7,10 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Gastos Públicos Já</title>
-
     <link rel="stylesheet" href="assets/css/fonts.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:700">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900">
     <link rel="stylesheet" href="assets/css/main.css">
 
 </head>
@@ -33,9 +32,6 @@
 	            </li>
 	            <li class="page-scroll">
 					<a href="#nas-redes">Nas Redes</a>
-	            </li>
-	            <li class="page-scroll">
-	                <a href="obras.html">Obras</a>
 	            </li>
 	        </ul>
 		</div>
@@ -91,6 +87,15 @@
 		        <div class="row-box">
 		            <div class="container">
 		                <div class="brasil-map">
+
+		                		<div class="tweet">
+		                			<div class="tweet-user">
+		                				<span class="vue-twitter"></span>
+		                				<h4 data-bindName="tweet-user" data-bindReplace="html"></h4>
+		                			</div>
+		                			<p class="tweet-text" data-bindName="tweet-text" data-bindReplace="html"></p>
+		                		</div>
+		                		
 		                      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 450 460" xml:space="preserve">
 		                        <g>
 		                          <a id="uf-to">
@@ -403,21 +408,17 @@
 	<!-- FOOTER -->
 
 
-    <div class="row-box gastos-model" hidden>
-        <a href="{{url}}">
-            <div class="obra-container">
-                <div class="obra-uf">
-                    <span class="br-uf-{{gastos-uf}}"></span>
-                </div>
-                <div class="obra-info">
-                    <h4>{{gastos-orgao}}</h4>
-                    <p><span class="br-brasil"></span> {{gastos-estado-nome}} </p>
-                    <p class="obra-value numeric">Liquidado: R${{gastos-liquido}}</p>
-                    <p class="obra-value numeric">Empenhado: R${{gastos-empenhado}}</p>
-                    <p class="obra-value numeric">Pago: R${{gastos-pago}}</p>
-                </div>
-            </div>
-        </a>          
+    <div class="obra-container gastos-model">
+        <div class="obra-uf">
+            <span class="br-uf" data-bindName="gastos-uf" data-bindReplace="class"></span>
+        </div>
+        <div class="obra-info">
+            <h4 data-bindName="gastos-orgao" data-bindReplace="html"></h4>
+            <p><span class="br-brasil"></span> <span data-bindName="gastos-estado-nome" data-bindReplace="html"></span></p>
+            <p class="obra-value numeric" data-bindName="gastos-liquido" data-bindReplace="html"></p>
+            <p class="obra-value numeric" data-bindName="gastos-empenhado" data-bindReplace="html"></p>
+            <p class="obra-value numeric" data-bindName="gastos-pago" data-bindReplace="html"></p>
+        </div>
     </div>
 
 	<script src="assets/js/jraw.js"></script>
