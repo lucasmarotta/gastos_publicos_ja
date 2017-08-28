@@ -35,10 +35,13 @@ $(function(){
 
     $.getJSON({ url:"http://localhost:8000/twitter",
         data: {
-            term:"a"
+            term:"Defensoria Publica Espirito Santo"
         },
         success: function(response) {
             console.log(response);
+            var brasilMap = $(".brasil-map");
+            var estado =  brasilMap.find("#uf-es");
+            estado.addClass("highlight-uf");
         },
         fail: function () {
             console.log("falhou");
