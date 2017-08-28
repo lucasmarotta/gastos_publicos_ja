@@ -33,6 +33,20 @@ $(function(){
         }
     });
 
+    $.getJSON({ url:"http://localhost:8000/gastos/es",
+        data: {
+            pg:1,
+            ano:2017
+        },
+        success: function(gastos) {
+            var gastosModel = $(".gastos-model");
+            gastosModel.bindValue("url","http://localhost");
+        },
+        fail: function (response) {
+            console.log(response);
+        }
+    });
+
 });
 
 

@@ -70,6 +70,13 @@
 		                <hr><span class="vue-star"></span><hr>
 		            </div>
 		        </div>
+					
+				<div class="row-box gastos">
+					
+					
+
+				</div>
+
 		    </div>
 		</section>
 
@@ -394,6 +401,24 @@
 	    -->  
 	</footer>
 	<!-- FOOTER -->
+
+
+    <div class="row-box gastos-model" hidden>
+        <a href="{{url}}">
+            <div class="obra-container">
+                <div class="obra-uf">
+                    <span class="br-uf-{{gastos-uf}}"></span>
+                </div>
+                <div class="obra-info">
+                    <h4>{{gastos-orgao}}</h4>
+                    <p><span class="br-brasil"></span> {{gastos-estado-nome}} </p>
+                    <p class="obra-value numeric">Liquidado: R${{gastos-liquido}}</p>
+                    <p class="obra-value numeric">Empenhado: R${{gastos-empenhado}}</p>
+                    <p class="obra-value numeric">Pago: R${{gastos-pago}}</p>
+                </div>
+            </div>
+        </a>          
+    </div>
 
 	<script src="assets/js/jraw.js"></script>
 	<script src="assets/js/main.js"></script>

@@ -12,7 +12,7 @@
 */
 
 $app->get('twitter', 'TwitterController@index');
-$app->get('gastos', 'GastosController@index');
+$app->get('gastos/es', 'GastosController@es');
 
 $app->get('/', function () use ($app) {
     return $app->version();

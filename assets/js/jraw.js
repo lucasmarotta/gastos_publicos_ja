@@ -393,6 +393,13 @@
 		//Aplica um objeto de regras de css
 		css: function(rules) {
 			return JRAW.applyCss(this, rules);
+		},
+
+		bindValue: function(name, value) {
+			return JRAW.each(this, function(){
+				var content = JRAW(this);
+				content.html(content.html().replace("{{"+name+"}}", value));
+			});
 		}
 
 	};
