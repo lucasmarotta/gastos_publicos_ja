@@ -35,7 +35,7 @@ $(function(){
 
     $.getJSON({ url:"http://localhost:8000/twitter",
         data: {
-            term:"Defensoria Publica Espirito Santo"
+            term:"a"
         },
         success: function(response) {
             console.log(response);
@@ -66,8 +66,8 @@ $(function(){
                 }
             });
         },
-        fail: function () {
-            console.log("falhou");
+        fail: function (response) {
+            console.log(response);
         }
     });
 
@@ -85,8 +85,6 @@ function dataAtualFormatada(data)
        mes = "0"+mes;
      var ano = data.getFullYear();
      var hora = data.getHours();
-     if(hora.toString().length == 1)
-     	hora = "0"+hora;
      var min = data.getMinutes();
      if(min.toString().length == 1)
      	min = "0"+min;

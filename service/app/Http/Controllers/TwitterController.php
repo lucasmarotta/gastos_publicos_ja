@@ -44,9 +44,6 @@ class TwitterController extends Controller
                 if($response && count($response["statuses"]) > 0) {
                     $tweet = ["text"=>$response["statuses"][0]["full_text"],"user"=>$response["statuses"][0]["user"]["name"]];
                 }
-                echo "<pre>";
-                print_r($response);
-                echo "</pre>";
             }
             return $tweet;
         } catch(Exception $e) {
