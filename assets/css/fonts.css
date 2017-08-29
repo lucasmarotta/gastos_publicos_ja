@@ -150,7 +150,7 @@
 }
 @font-face {
   font-family: 'Vue Awesome';
-  src: url('../fonts/vue_awesome/Vue-Awesome.woff2?xqx477') format('woff2'), url('../fonts/vue_awesome/Vue-Awesome.ttf?xqx477') format('truetype'), url('../fonts/vue_awesome/Vue-Awesome.woff?xqx477') format('woff'), url('../fonts/vue_awesome/Vue-Awesome.svg?xqx477#Vue-Awesome') format('svg');
+  src: url('../fonts/vue_awesome/Vue-Awesome.woff2?jsu3w2') format('woff2'), url('../fonts/vue_awesome/Vue-Awesome.ttf?jsu3w2') format('truetype'), url('../fonts/vue_awesome/Vue-Awesome.woff?jsu3w2') format('woff'), url('../fonts/vue_awesome/Vue-Awesome.svg?jsu3w2#Vue-Awesome') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -172,510 +172,540 @@
 .vue-activity:before {
   content: "\e901";
 }
-.vue-anchor:before {
+.vue-airplane:before {
   content: "\e902";
 }
-.vue-arrow-down:before {
+.vue-anchor:before {
   content: "\e903";
 }
-.vue-arrow-left:before {
+.vue-arrow-down:before {
   content: "\e904";
 }
-.vue-arrow-right:before {
+.vue-arrow-left:before {
   content: "\e905";
 }
-.vue-arrow-up:before {
+.vue-arrow-right:before {
   content: "\e906";
 }
-.vue-asterisk:before {
+.vue-arrow-up:before {
   content: "\e907";
 }
-.vue-at:before {
+.vue-asterisk:before {
   content: "\e908";
 }
-.vue-award:before {
+.vue-at:before {
   content: "\e909";
 }
-.vue-bell:before {
+.vue-award:before {
   content: "\e90a";
 }
-.vue-binocollars:before {
+.vue-bell:before {
   content: "\e90b";
 }
-.vue-bit-ghost:before {
+.vue-binocollars:before {
   content: "\e90c";
 }
-.vue-bit-pacman:before {
+.vue-bit-ghost:before {
   content: "\e90d";
 }
-.vue-book:before {
+.vue-bit-pacman:before {
   content: "\e90e";
 }
-.vue-bookmark:before {
+.vue-book:before {
   content: "\e90f";
 }
-.vue-bot:before {
+.vue-bookmark:before {
   content: "\e910";
 }
-.vue-box:before {
+.vue-bot:before {
   content: "\e911";
 }
-.vue-calendar:before {
+.vue-box:before {
   content: "\e912";
 }
-.vue-camera:before {
+.vue-calendar:before {
   content: "\e913";
 }
-.vue-cancel:before {
+.vue-camera:before {
   content: "\e914";
 }
-.vue-cart:before {
+.vue-cancel:before {
   content: "\e915";
 }
-.vue-chart-bar:before {
+.vue-cart:before {
   content: "\e916";
 }
-.vue-checked:before {
+.vue-chart-bar:before {
   content: "\e917";
 }
-.vue-chess-tower:before {
+.vue-checked:before {
   content: "\e918";
 }
-.vue-clip:before {
+.vue-chess-tower:before {
   content: "\e919";
 }
-.vue-clock:before {
+.vue-clip:before {
   content: "\e91a";
 }
-.vue-cloud:before {
+.vue-clock:before {
   content: "\e91b";
 }
-.vue-cloud-download:before {
+.vue-cloud:before {
   content: "\e91c";
 }
-.vue-cloud-upload:before {
+.vue-cloud-download:before {
   content: "\e91d";
 }
-.vue-cog:before {
+.vue-cloud-upload:before {
   content: "\e91e";
 }
-.vue-command:before {
+.vue-coffee-cup:before {
   content: "\e91f";
 }
-.vue-comment:before {
+.vue-cog:before {
   content: "\e920";
 }
-.vue-connection:before {
+.vue-coins:before {
   content: "\e921";
 }
-.vue-copy:before {
+.vue-command:before {
   content: "\e922";
 }
-.vue-cross:before {
+.vue-comment:before {
   content: "\e923";
 }
-.vue-dashboard:before {
+.vue-connection:before {
   content: "\e924";
 }
-.vue-database:before {
+.vue-copy:before {
   content: "\e925";
 }
-.vue-desk-lamp:before {
+.vue-cross:before {
   content: "\e926";
 }
-.vue-desktop:before {
+.vue-dashboard:before {
   content: "\e927";
 }
-.vue-document:before {
+.vue-database:before {
   content: "\e928";
 }
-.vue-dollar:before {
+.vue-desk-lamp:before {
   content: "\e929";
 }
-.vue-down:before {
+.vue-desktop:before {
   content: "\e92a";
 }
-.vue-download:before {
+.vue-document:before {
   content: "\e92b";
 }
-.vue-droplet:before {
+.vue-dollar:before {
   content: "\e92c";
 }
-.vue-edit:before {
+.vue-down:before {
   content: "\e92d";
 }
-.vue-ellipsis:before {
+.vue-download:before {
   content: "\e92e";
 }
-.vue-emoti-angry:before {
+.vue-drink:before {
   content: "\e92f";
 }
-.vue-emoti-furious:before {
-  content: "\e934";
-}
-.vue-emoti-baffled:before {
+.vue-droplet:before {
   content: "\e930";
 }
-.vue-emoti-confused:before {
+.vue-edit:before {
   content: "\e931";
 }
-.vue-emoti-cool:before {
+.vue-ellipsis:before {
   content: "\e932";
 }
-.vue-emoti-crying:before {
+.vue-emoti-angry:before {
   content: "\e933";
 }
-.vue-emoti-happy:before {
+.vue-emoti-baffled:before {
+  content: "\e934";
+}
+.vue-emoti-confused:before {
   content: "\e935";
 }
-.vue-emoti-hipster:before {
+.vue-emoti-cool:before {
   content: "\e936";
 }
-.vue-emoti-sad:before {
+.vue-emoti-crying:before {
   content: "\e937";
 }
-.vue-emoti-shocked:before {
+.vue-emoti-furious:before {
   content: "\e938";
 }
-.vue-emoti-sleepy:before {
+.vue-emoti-happy:before {
   content: "\e939";
 }
-.vue-emoti-smile:before {
+.vue-emoti-hipster:before {
   content: "\e93a";
 }
-.vue-emoti-thinking:before {
+.vue-emoti-sad:before {
   content: "\e93b";
 }
-.vue-emoti-tongue:before {
+.vue-emoti-shocked:before {
   content: "\e93c";
 }
-.vue-emoti-wink:before {
+.vue-emoti-sleepy:before {
   content: "\e93d";
 }
-.vue-excel:before {
+.vue-emoti-smile:before {
   content: "\e93e";
 }
-.vue-eye:before {
+.vue-emoti-thinking:before {
   content: "\e93f";
 }
-.vue-eyedropper:before {
+.vue-emoti-tongue:before {
   content: "\e940";
 }
-.vue-facebook:before {
+.vue-emoti-wink:before {
   content: "\e941";
 }
-.vue-factory:before {
+.vue-excel:before {
   content: "\e942";
 }
-.vue-fast-forward:before {
+.vue-eye:before {
   content: "\e943";
 }
-.vue-feather:before {
+.vue-eyedropper:before {
   content: "\e944";
 }
-.vue-file:before {
+.vue-facebook:before {
   content: "\e945";
 }
-.vue-filter:before {
+.vue-factory:before {
   content: "\e946";
 }
-.vue-flag:before {
+.vue-fast-forward:before {
   content: "\e947";
 }
-.vue-floppy-disk:before {
+.vue-feather:before {
   content: "\e948";
 }
-.vue-folder:before {
+.vue-female:before {
   content: "\e949";
 }
-.vue-folder-zip:before {
+.vue-file:before {
   content: "\e94a";
 }
-.vue-forklift:before {
+.vue-filter:before {
   content: "\e94b";
 }
-.vue-fragile:before {
+.vue-flag:before {
   content: "\e94c";
 }
-.vue-gamepad:before {
+.vue-floppy-disk:before {
   content: "\e94d";
 }
-.vue-gift:before {
+.vue-folder:before {
   content: "\e94e";
 }
-.vue-globe:before {
+.vue-folder-zip:before {
   content: "\e94f";
 }
-.vue-graph:before {
+.vue-forklift:before {
   content: "\e950";
 }
-.vue-grid:before {
+.vue-fragile:before {
   content: "\e951";
 }
-.vue-hash:before {
+.vue-fruit:before {
   content: "\e952";
 }
-.vue-headset:before {
+.vue-gamepad:before {
   content: "\e953";
 }
-.vue-heart:before {
+.vue-gift:before {
   content: "\e954";
 }
-.vue-home:before {
+.vue-globe:before {
   content: "\e955";
 }
-.vue-id-card:before {
+.vue-graph:before {
   content: "\e956";
 }
-.vue-image:before {
+.vue-grid:before {
   content: "\e957";
 }
-.vue-info:before {
+.vue-hash:before {
   content: "\e958";
 }
-.vue-instagram:before {
+.vue-headset:before {
   content: "\e959";
 }
-.vue-invoice:before {
+.vue-heart:before {
   content: "\e95a";
 }
-.vue-key:before {
+.vue-home:before {
   content: "\e95b";
 }
-.vue-keyboard:before {
+.vue-hourglass:before {
   content: "\e95c";
 }
-.vue-layers:before {
+.vue-id-card:before {
   content: "\e95d";
 }
-.vue-layout:before {
+.vue-image:before {
   content: "\e95e";
 }
-.vue-left:before {
+.vue-info:before {
   content: "\e95f";
 }
-.vue-lifebuoy:before {
+.vue-instagram:before {
   content: "\e960";
 }
-.vue-lightning:before {
+.vue-invoice:before {
   content: "\e961";
 }
-.vue-link:before {
+.vue-key:before {
   content: "\e962";
 }
-.vue-location:before {
+.vue-keyboard:before {
   content: "\e963";
 }
-.vue-logout:before {
+.vue-layers:before {
   content: "\e964";
 }
-.vue-magnifier:before {
+.vue-layout:before {
   content: "\e965";
 }
-.vue-mail:before {
+.vue-left:before {
   content: "\e966";
 }
-.vue-map:before {
+.vue-lifebuoy:before {
   content: "\e967";
 }
-.vue-maximize:before {
+.vue-lightning:before {
   content: "\e968";
 }
-.vue-megaphone:before {
+.vue-link:before {
   content: "\e969";
 }
-.vue-menu:before {
+.vue-location:before {
   content: "\e96a";
 }
-.vue-microphone:before {
+.vue-logout:before {
   content: "\e96b";
 }
-.vue-minimize:before {
+.vue-magnifier:before {
   content: "\e96c";
 }
-.vue-minus:before {
+.vue-mail:before {
   content: "\e96d";
 }
-.vue-monitor:before {
+.vue-male:before {
   content: "\e96e";
 }
-.vue-move:before {
+.vue-map:before {
   content: "\e96f";
 }
-.vue-movie:before {
+.vue-maximize:before {
   content: "\e970";
 }
-.vue-music:before {
+.vue-megaphone:before {
   content: "\e971";
 }
-.vue-mute:before {
+.vue-menu:before {
   content: "\e972";
 }
-.vue-padlock-locked:before {
+.vue-microphone:before {
   content: "\e973";
 }
-.vue-padlock-unlocked:before {
+.vue-minimize:before {
   content: "\e974";
 }
-.vue-paint-roller:before {
+.vue-minus:before {
   content: "\e975";
 }
-.vue-pause:before {
+.vue-monitor:before {
   content: "\e976";
 }
-.vue-pdf:before {
+.vue-move:before {
   content: "\e977";
 }
-.vue-pencil:before {
+.vue-movie:before {
   content: "\e978";
 }
-.vue-percent:before {
+.vue-museum:before {
   content: "\e979";
 }
-.vue-phone:before {
+.vue-music:before {
   content: "\e97a";
 }
-.vue-pin:before {
+.vue-mute:before {
   content: "\e97b";
 }
-.vue-play:before {
+.vue-padlock-locked:before {
   content: "\e97c";
 }
-.vue-plus:before {
+.vue-padlock-unlocked:before {
   content: "\e97d";
 }
-.vue-pointer:before {
+.vue-paint-roller:before {
   content: "\e97e";
 }
-.vue-power:before {
+.vue-pause:before {
   content: "\e97f";
 }
-.vue-presentation:before {
+.vue-pdf:before {
   content: "\e980";
 }
-.vue-printer:before {
+.vue-pencil:before {
   content: "\e981";
 }
-.vue-question:before {
+.vue-percent:before {
   content: "\e982";
 }
-.vue-quote-close:before {
+.vue-phone:before {
   content: "\e983";
 }
-.vue-quote-open:before {
+.vue-pin:before {
   content: "\e984";
 }
-.vue-refresh:before {
+.vue-play:before {
   content: "\e985";
 }
-.vue-reload:before {
+.vue-plus:before {
   content: "\e986";
 }
-.vue-reply:before {
+.vue-pointer:before {
   content: "\e987";
 }
-.vue-rewind:before {
+.vue-power:before {
   content: "\e988";
 }
-.vue-right:before {
+.vue-presentation:before {
   content: "\e989";
 }
-.vue-scissors:before {
+.vue-printer:before {
   content: "\e98a";
 }
-.vue-server:before {
+.vue-question:before {
   content: "\e98b";
 }
-.vue-share:before {
+.vue-quote-close:before {
   content: "\e98c";
 }
-.vue-shuffle:before {
+.vue-quote-open:before {
   content: "\e98d";
 }
-.vue-signal:before {
+.vue-refresh:before {
   content: "\e98e";
 }
-.vue-sitemap:before {
+.vue-reload:before {
   content: "\e98f";
 }
-.vue-sliders:before {
+.vue-reply:before {
   content: "\e990";
 }
-.vue-soundwave:before {
+.vue-rewind:before {
   content: "\e991";
 }
-.vue-spinner:before {
+.vue-right:before {
   content: "\e992";
 }
-.vue-star:before {
+.vue-scissors:before {
   content: "\e993";
 }
-.vue-stop:before {
+.vue-server:before {
   content: "\e994";
 }
-.vue-suitcase:before {
+.vue-share:before {
   content: "\e995";
 }
-.vue-support:before {
+.vue-ship:before {
   content: "\e996";
 }
-.vue-tag:before {
+.vue-shuffle:before {
   content: "\e997";
 }
-.vue-text:before {
+.vue-signal:before {
   content: "\e998";
 }
-.vue-thumbs-down:before {
+.vue-sitemap:before {
   content: "\e999";
 }
-.vue-thumbs-up:before {
+.vue-sliders:before {
   content: "\e99a";
 }
-.vue-tools:before {
+.vue-soundwave:before {
   content: "\e99b";
 }
-.vue-trash:before {
+.vue-spinner:before {
   content: "\e99c";
 }
-.vue-trophy:before {
+.vue-star:before {
   content: "\e99d";
 }
-.vue-truck:before {
+.vue-stop:before {
   content: "\e99e";
 }
-.vue-twitter:before {
+.vue-suitcase:before {
   content: "\e99f";
 }
-.vue-umbrella:before {
+.vue-support:before {
   content: "\e9a0";
 }
-.vue-untagged:before {
+.vue-tag:before {
   content: "\e9a1";
 }
-.vue-up:before {
+.vue-text:before {
   content: "\e9a2";
 }
-.vue-upload:before {
+.vue-thumbs-down:before {
   content: "\e9a3";
 }
-.vue-user:before {
+.vue-thumbs-up:before {
   content: "\e9a4";
 }
-.vue-users:before {
+.vue-tools:before {
   content: "\e9a5";
 }
-.vue-volume:before {
+.vue-trash:before {
   content: "\e9a6";
 }
-.vue-warning:before {
+.vue-trophy:before {
   content: "\e9a7";
 }
-.vue-youtube:before {
+.vue-truck:before {
   content: "\e9a8";
 }
-.vue-zoom-in:before {
+.vue-twitter:before {
   content: "\e9a9";
 }
-.vue-zoom-out:before {
+.vue-umbrella:before {
   content: "\e9aa";
+}
+.vue-untagged:before {
+  content: "\e9ab";
+}
+.vue-up:before {
+  content: "\e9ac";
+}
+.vue-upload:before {
+  content: "\e9ad";
+}
+.vue-user:before {
+  content: "\e9ae";
+}
+.vue-users:before {
+  content: "\e9af";
+}
+.vue-volume:before {
+  content: "\e9b0";
+}
+.vue-warning:before {
+  content: "\e9b1";
+}
+.vue-youtube:before {
+  content: "\e9b2";
+}
+.vue-zoom-in:before {
+  content: "\e9b3";
+}
+.vue-zoom-out:before {
+  content: "\e9b4";
 }

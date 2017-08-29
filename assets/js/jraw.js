@@ -244,6 +244,37 @@
 			}
 		},
 
+
+
+		//Define ou obtem o valor de um objeto do tipo input
+		val: function(value) {
+			if(value) {
+				return JRAW.each(this, function(){
+					if(isNode(this) && this.tagName == "INPUT") {
+						this.value = value;
+					}
+				});
+
+			} else {
+				if(this.length && isNode(this[0]) && this[0].tagName == "INPUT") {
+					return this.get(0).value;
+				}
+			}
+			return null;
+		},
+
+		//Adiciona o evento de click para todos os elementos
+		click: function(callback) {
+			return JRAW.each(this, function(){
+				var self = this;
+				if(isNode(this)) {
+					this.addEventListener("click", function(event){
+						callback.call(self, event);
+					});
+				}
+			});
+		},
+
 		//Retorna uma nova coleção de objetos filhos encontrados com o seletor
 		find: function(selector) {
 			var newNodes = JRAW();
@@ -259,6 +290,15 @@
 				return newNodes;		
 			}
 			return rootJRAW;
+		},
+
+		//Remove todos os elementos
+		remove: function() {
+			JRAW.each(this, function(){
+				if(isNode(this)) {
+					this.remove();
+				}
+			});
 		},
 
 		//Retorna um novo conjunto de JRAW com elementos clonados
@@ -352,7 +392,7 @@
 
 		//Obtém ou substitui o HTML de um elemento
 		html: function(htmlValue) {
-			if(htmlValue) {
+			if(htmlValue !== undefined) {
 				htmlValue = arguments[0];
 				return JRAW.each(this, function(){
 					this.innerHTML = htmlValue;
@@ -416,10 +456,11 @@
 			time = time || 400;
 			JRAW.applyCss(this, {
 				opacity:0,
+				transition:"opacity 0 ease-in-out"
 			});
 			setTimeout(function(){
 				JRAW.applyCss(self, {opacity: 1, transition:"opacity "+time+"ms ease-in-out"});
-			},50);
+			},500);
 			return this;
 		},
 

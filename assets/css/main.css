@@ -173,8 +173,7 @@ textarea {
 .pagination > li {
   display: inline;
 }
-.pagination > li a,
-.pagination > li span {
+.pagination > li a {
   padding: 10px 15px;
   text-decoration: none;
   color: #ffffff;
@@ -185,12 +184,7 @@ textarea {
   transition: all 0.3s;
   cursor: pointer;
 }
-.pagination > li a:hover,
-.pagination > li span:hover,
-.pagination > li a:focus,
-.pagination > li span:focus,
-.pagination > li a:active,
-.pagination > li span:active {
+.pagination > li a:hover {
   background-color: #128f76;
 }
 .pagination > li:first-child > a,
@@ -211,17 +205,29 @@ textarea {
   border-top-left-radius: 0;
   background-clip: padding-box;
 }
+.pagination .disabled a,
 .pagination .disabled span {
   background: #24e3be;
   cursor: not-allowed;
 }
+.pagination .disabled a:hover,
 .pagination .disabled span:hover,
+.pagination .disabled a:focus,
 .pagination .disabled span:focus,
+.pagination .disabled a:active,
 .pagination .disabled span:active {
   background: #24e3be;
 }
+.pagination .active a,
 .pagination .active span {
   background-color: #128f76;
+}
+.loading {
+  width: 45px;
+  height: 45px;
+  background: url(../img/loading.gif) no-repeat;
+  background-size: 45px 45px;
+  margin: 40px auto 0;
 }
 .input-group {
   position: relative;
@@ -291,87 +297,91 @@ textarea {
   font-family: "Lato", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: 900;
 }
-.obra-container .br-uf-ac {
+.gastos-container .br-uf-ac {
   color: #FFD54F;
 }
-.obra-container .br-uf-al {
+.gastos-container .br-uf-al {
   color: #7986CB;
 }
-.obra-container .br-uf-ap {
+.gastos-container .br-uf-ap {
   color: #4DB6AC;
 }
-.obra-container .br-uf-ba {
+.gastos-container .br-uf-ba {
   color: #E57373;
 }
-.obra-container .br-uf-ce {
+.gastos-container .br-uf-ce {
   color: #AED581;
 }
-.obra-container .br-uf-df {
+.gastos-container .br-uf-df {
   color: #A3B282;
 }
-.obra-container .br-uf-es {
+.gastos-container .br-uf-es {
   color: #F48FB1;
 }
-.obra-container .br-uf-go {
+.gastos-container .br-uf-go {
   color: #DCE775;
 }
-.obra-container .br-uf-ma {
+.gastos-container .br-uf-ma {
   color: #AD7070;
 }
-.obra-container .br-uf-mt {
+.gastos-container .br-uf-mt {
   color: #378AEF;
 }
-.obra-container .br-uf-ms {
+.gastos-container .br-uf-ms {
   color: #81D4FA;
 }
-.obra-container .br-uf-mg {
+.gastos-container .br-uf-mg {
   color: white;
 }
-.obra-container .br-uf-pa {
+.gastos-container .br-uf-pa {
   color: #E81E1E;
 }
-.obra-container .br-uf-pb {
+.gastos-container .br-uf-pb {
   color: #BF1C1C;
 }
-.obra-container .br-uf-pr {
+.gastos-container .br-uf-pr {
   color: #40A59B;
 }
-.obra-container .br-uf-pe {
+.gastos-container .br-uf-pe {
   color: #7068E9;
 }
-.obra-container .br-uf-pi {
+.gastos-container .br-uf-pi {
   color: #a8aa8a;
 }
-.obra-container .br-uf-rj {
+.gastos-container .br-uf-rj {
   color: #68CBF8;
 }
-.obra-container .br-uf-rn {
+.gastos-container .br-uf-rn {
   color: #ceeacf;
 }
-.obra-container .br-uf-rs {
+.gastos-container .br-uf-rs {
   color: #aa310f;
 }
-.obra-container .br-uf-ro {
+.gastos-container .br-uf-ro {
   color: #4692dd;
 }
-.obra-container .br-uf-rr {
+.gastos-container .br-uf-rr {
   color: #83daf7;
 }
-.obra-container .br-uf-sc {
+.gastos-container .br-uf-sc {
   color: #AED581;
 }
-.obra-container .br-uf-sp {
+.gastos-container .br-uf-sp {
   color: #8D6E63;
 }
-.obra-container .br-uf-se {
+.gastos-container .br-uf-se {
   color: #ad913e;
 }
-.obra-container .br-uf-to {
+.gastos-container .br-uf-to {
   color: #FF9800;
 }
 /* ==========================================================================
     MAIN
    ========================================================================== */
+html,
+body {
+  height: 100vh;
+}
 body {
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
@@ -529,7 +539,7 @@ footer .footer-copyright {
   color: #263238;
   float: left;
 }
-.obra-container {
+.gastos-container {
   color: #263238;
   font-size: 17px;
   margin-bottom: 15px;
@@ -538,25 +548,31 @@ footer .footer-copyright {
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
+  float: left;
+  width: 50%;
 }
-.obra-container .obra-uf {
+.gastos-container .obra-uf {
   font-size: 100px;
   float: left;
   margin-right: 7px;
   text-shadow: 2px 1px 5px rgba(0, 0, 0, 0.9);
 }
-.obra-container .obra-info {
+.gastos-container .obra-info {
   float: left;
   width: 80%;
   margin-top: 10px;
 }
-.obra-container .obra-info > * {
+.gastos-container .obra-info > * {
   margin: 4px;
 }
-.obra-container .obra-info h4 {
+.gastos-container .obra-info h4 {
   text-transform: initial;
+  width: 380px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.obra-container .obra-social-counter {
+.gastos-container .obra-social-counter {
   font-size: 19px;
 }
 .brasil-map svg {
@@ -701,9 +717,13 @@ header .state-search .input-group-field::-moz-placeholder {
 header .state-search .input-group-field:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.85);
 }
-.obra-section {
+header .state-search .btn-search {
+  cursor: pointer;
+}
+.gastos-section {
   background: #EAE2E0 url(../img/mais_vistas_bg.jpg);
   background-size: cover;
+  display: none;
 }
 .gastos-model {
   display: none;

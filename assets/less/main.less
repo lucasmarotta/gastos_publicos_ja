@@ -9,6 +9,11 @@
     MAIN
    ========================================================================== */
 
+html,body
+{
+	height:100vh;
+}
+
 body
 {
 	font-family: "Segoe UI", Helvetica, Arial, sans-serif;
@@ -199,7 +204,7 @@ footer
     }
 }
 
-.obra-container
+.gastos-container
 {
     color: @font-color;
     font-size: 17px;
@@ -209,6 +214,8 @@ footer
     min-height: 1px;
     padding-left: 15px;
     padding-right: 15px;
+    float:left;
+    width:50%;
 
     .obra-uf
     {
@@ -230,6 +237,7 @@ footer
 	    h4
 	    {
 	    	text-transform: initial;
+	    	.text-ellipsis(380px);
 	    }
 	    	    	
     }
@@ -396,13 +404,19 @@ header
 		    .text-shadow(2px 1px 5px rgba(0, 0, 0, 0.9));
 		    .placeholder(rgba(255, 255, 255, 0.85));
     	}
+
+    	.btn-search
+    	{
+    		cursor:pointer;
+    	}
     }
 }
 
-.obra-section
+.gastos-section
 {
     background: @bg-color url(../img/mais_vistas_bg.jpg);
     background-size: cover;
+    display:none;
 }
 
 .gastos-model

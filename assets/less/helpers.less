@@ -104,7 +104,7 @@
     {
         display: inline;
         
-        a, span
+        a
         {
             padding: 10px 15px;
             text-decoration: none;
@@ -114,7 +114,7 @@
             .transition(all .3s);
             cursor: pointer;
 
-            &:hover, &:focus, &:active
+            &:hover
             {
                 background-color: darken(@alt-color, 10%);
             }
@@ -133,22 +133,36 @@
         }
     }
 
-    .disabled span
+    .disabled
     {
-        background: lighten(@alt-color, 10%);
-        cursor: not-allowed;
-
-        &:hover, &:focus, &:active
+        a, span
         {
             background: lighten(@alt-color, 10%);
-        }       
+            cursor: not-allowed;
+            &:hover, &:focus, &:active
+            {
+                background: lighten(@alt-color, 10%);
+            }
+        }      
     }
 
-    .active span
+    .active
     {
-        background-color: darken(@alt-color, 10%);       
+        a, span
+        {
+            background-color: darken(@alt-color, 10%); 
+        }    
     }
 
+}
+
+.loading
+{
+    width:45px;
+    height:45px;
+    background: url(../img/loading.gif) no-repeat;
+    background-size: 45px 45px;
+    margin: 40px auto 0;
 }
 
 .input-group
@@ -222,7 +236,7 @@
     font-weight: 900;
 }
 
-.obra-container
+.gastos-container
 {
     .br-uf-ac {color: #FFD54F;}
     .br-uf-al {color: #7986CB;}

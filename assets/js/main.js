@@ -5,22 +5,63 @@
 $(function(){
 
     var footerYear = $(".footer-year"),
+        timer = null,
         gastosModel = $(".gastos-model"),
+        gastosSection = $(".gastos-section"),
         tweet = $(".tweet"),
+        gastos = $(".gastos"),
         brasilMap = $(".brasil-map"),
-        socialSection = $(".social-section");
+        socialSection = $(".social-section"),
+        inputSearch = $(".state-search input"),
+        estados = {
+            ac:["acre", "ac"],
+            al:["alagoas", "al"],
+            ap:["amapá", "amapa", "ap"],
+            ba:["bahia", "ba"],
+            ce:["ceará", "ceara", "ce"],
+            df:["destrito federal", "brasília", "brasilia", "df", "br"],
+            es:["espírito santo", "espirito santo", "es"],
+            go:["goias", "go"],
+            ma:["maranhão", "maranhao"],
+            mt:["mato grosso", "mato grosso do norte", "mt"],
+            ms:["mato grosso do sul", "ms"],
+            mg:["minas gerais", "minas", "mg"],
+            pa:["pará", "para", "pa"],
+            pb:["paraíba", "paraiba", "pb"],
+            pr:["paraná", "parana", "pr"],
+            pe:["pernambuco", "pe"],
+            pi:["piauí", "piaui", "pi"],
+            rj:["rio de janeiro", "rio", "rj"],
+            rn:["rio grande do norte", "rio grande", "rn"],
+            rs:["rio grande do sul", "rs"],
+            ro:["rondônia", "rondonia", "ro"],
+            rr:["roraima", "rr"],
+            sc:["santa catarina", "sc"],
+            sp:["são paulo", "sao paulo", "sp"],
+            se:["sergipe", "se"],
+            to:["tocantins", "to"]
+        };
 
     setIpInfo();
-    loadGastos(loadBrasilMap);
 
-    function loadGastos(callback)
+    $(".btn-search").click(function(){
+        var uf = checkUf(inputSearch.val().toLowerCase());
+        if(uf != null) {
+            gastosSection.show();
+            socialSection.hide();
+            if(timer != null) clearInterval(timer);
+            gastosSection.append("<div class='loading'></div>");
+            loadGastos("http://localhost:8000/gastos/"+uf+"?pg=1&ano=2017", loadBrasilMap);
+
+        }
+    });
+
+    function loadGastos(url, callback)
     {
-        $.getJSON({ url:"http://localhost:8000/gastos/es",
-            data: {
-                pg:1,
-                ano:2017
-            },
+        $.getJSON({url:url,
             success: function(response) {
+                gastos.html("").fadeIn();
+                gastosSection.find(".loading").remove();
                 response.gastos.forEach(function(item, index){
                     var newGastos = gastosModel.clone();
                     newGastos.bindValue("url","detalhes.html");
@@ -30,69 +71,92 @@ $(function(){
                     newGastos.bindValue("gastos-empenhado", "Empenhado R$"+item.empenhado);
                     newGastos.bindValue("gastos-pago", "Pago R$"+item.pago);
                     newGastos.bindValue("gastos-liquido", "Líquido R$"+item.liquido);
-                    $(".gastos").append(newGastos.show().get(0));
+                    gastos.append(newGastos.show().get(0));
                 });
-                callback();
+                mapLinks(response, "http://localhost:8000/gastos/es");
+                if(callback) callback();
             },
             fail: function (response) {
+                gastosSection.find(".loading").remove();
                 console.warn("Não foi possível obter gastos");
             }
         });
     }
 
+    function mapLinks(obj, baseUrl)
+    {
+        $(".pagination").remove();
+        gastosSection.append(createLinks(obj, baseUrl));
+        $(".pagination").find("a").click(function(event){
+            event.preventDefault();
+            gastosSection.append("<div class='loading'></div>");
+            loadGastos(this.getAttribute("href"));
+        });
+    }
+
+    function createLinks (obj, baseUrl)
+    {
+        var links = "<ul class='pagination'>";
+        if(obj.curPg == 1) {
+            links += "<li class='disabled'><a href='#' onclick='paginate'><span class='vue-left'></span></a></li>";
+        } else {
+            links += "<li><a href='"+baseUrl+"?pg="+(obj.curPg-1)+"&ano=2017'><span class='vue-left'></span></a></li>";
+        }
+
+        for(var i = 1; i <= obj.totalPg; i++) {
+            if(obj.curPg == i) {
+                links += "<li class='active'><a href='"+baseUrl+"?pg="+i+"&ano=2017'>"+i+"</a></li>"; 
+           } else {
+                links += "<li><a href='"+baseUrl+"?pg="+i+"&ano=2017'>"+i+"</a></li>";
+           }
+        }
+
+        if(obj.curPg == obj.totalPg) {
+            links += "<li class='disabled'><a href='#' onclick='paginate'><span class='vue-left'></span></a></li>";
+        } else {
+            links += "<li><a href='"+baseUrl+"?pg="+(obj.curPg+1)+"&ano=2017'><span class='vue-right'></span></a></li>";
+        }
+
+        links += "</ul>";
+        return links;
+    }
+
     function loadBrasilMap()
     {
         var randomOrgaoRequest = {
-            url:"http://localhost:8000/gastos/random",
-            data: {ano:"2017"},
-            cache: false,
-            success: function(response) {
-                if(response.data.length > 0) {
-                    loadTweet(response.data);
-                } else {
-                    console.warn("Nenhum orgao randômico retornado");
+                url:"http://localhost:8000/gastos/randomTweet",
+                data: {ano:"2017"},
+                cache: false,
+                success: function(response) {
+                    if(response.user) {
+                        console.info("Tweet com termo: "+response.term+" foi encontrado!");
+                        socialSection.show();
+                        var estado =  brasilMap.find("#uf-es");
+                        var dim = estado.getDimension();
+                        estado.addClass("highlight-uf");
+                        tweet.bindValue("tweet-user",response.user);
+                        tweet.bindValue("tweet-text",response.text);
+                        setTimeout(function(){
+                            tweet.css({visibility:'visible'});
+                            var tweetDim = tweet.getDimension(),
+                                position = {
+                                    top: dim.top - tweetDim.height + dim.height/2 - 20,
+                                    left: dim.left - tweetDim.width/2 + dim.width/2
+                                };
+                            tweet.setPosition(position);
+                        },50);
+                    } else {
+                        console.warn("Não foi possível obter o tweet com o termo: "+response.term);
+                    }
+                },
+                fail: function() {
+                    console.warn("Não foi possível obter tweet randômico");
                 }
-            },
-            fail: function() {
-                console.warn("Não foi possível obter orgao randômico");
-            }
         };
 
-        setInterval(function(){
-            $.ajax(randomOrgaoRequest);
+        timer = setInterval(function(){
+            $.getJSON(randomOrgaoRequest);
         },15*1000);
-    }
-
-    function loadTweet(term)
-    {
-        $.getJSON({ url:"http://localhost:8000/twitter",
-            data: {term:term},
-            success: function(response) {
-                console.log(response);
-                if(response.user) {
-                    socialSection.show();
-                    var estado =  brasilMap.find("#uf-es");
-                    var dim = estado.getDimension();
-                    estado.addClass("highlight-uf");
-                    tweet.bindValue("tweet-user",response.user);
-                    tweet.bindValue("tweet-text",response.text);
-                    setTimeout(function(){
-                        tweet.css({visibility:'visible'});
-                        var tweetDim = tweet.getDimension(),
-                            position = {
-                                top: dim.top - tweetDim.height + dim.height/2 - 20,
-                                left: dim.left - tweetDim.width/2 + dim.width/2
-                            };
-                        tweet.setPosition(position);
-                    },50);
-                } else {
-                    console.log("Não foi possível obter o tweet com o termo: "+term);
-                }
-            },
-            fail: function () {
-                console.log("Não foi possível obter o tweet com o termo: "+term);
-            }
-        });      
     }
 
     function setIpInfo()
@@ -124,6 +188,18 @@ $(function(){
                 }
             }
         });
+    }
+
+    function checkUf(uf)
+    {
+        for (var key in estados) {
+            if (estados.hasOwnProperty(key)) {
+                if(estados[key].includes(uf)) {
+                    return key;
+                }
+            }
+        }
+        return null;     
     }
 
     function formatDate(data)

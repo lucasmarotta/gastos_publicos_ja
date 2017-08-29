@@ -3,26 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 class GastosController extends Controller
 {
 	const ES_URL = "https://transparencia.es.gov.br/Api/Despesa/ListarOrgaos";
 
+    private $twiiterApp = [
+        'key' => 'dLDm9kp0I9raYSUhFraWugjA6',
+        'secret' => 'UwaVvzZj1BoXNMmBEtebmDZwOfrBeNSUteA2bELHoM3oePl9to',
+        'oauth_token' => '737760914825482240-gNw7HOp1tZJZniy83rtf8atzWJl8Ywn',
+        'oauth_token_secret' => 'NvsvSzepJg0XuAocSa7O5tUamBXSufRqNg8wE73VNvjpx'
+    ];
+
+
 	public function index()
 	{
+		set_time_limit(60);
 		echo "<pre>";
-
 		$url = "https://servicos.goias.gov.br/ptg-api/rest/execorcamentarianaturezadespesa?ano=2017&mes=1";
-		$opts = [
-		  'http'=>[
-		    'method'=>"GET",
-		    'header'=>	"content-type: application/gov.go.ptg.service.entidade.v1.despesas.execorcamentarianaturezadespesa-v1+json\r\n" .
-		    			"transfer-encoding: chunked\r\n" .
-		    			"content-range: null/340\r\n"
-		  ]
-		];
-		$context = stream_context_create($opts);
-		$result = file_get_contents($url,false,$context);
+		$header = ["accept: application/gov.go.ptg.service.entidade.v1.despesas.execorcamentarianaturezadespesa-v1+json", "content-type:*/*"];
+		print_r($this->requestGastos($url, $this->createContext($header)));
 	}
 
 	public function es(Request $request)
@@ -41,7 +42,7 @@ class GastosController extends Controller
 		return '';
 	}
 
-	public function random(Request $request)
+	public function randomTweet(Request $request)
 	{
 		$ano = $request->input("ano") ? : "2017";
 		$pg = $request->input("pg") ? : 1;
@@ -50,18 +51,51 @@ class GastosController extends Controller
 		if($context) {
 			$response = $this->requestGastos($url, $context);
 			if($response) {
-				return $this->getRandomOrgaoEs($response->Orgaos);
+				return $this->getTweet($this->getRandomOrgaoEs($response->Orgaos));
 			}
 		}
-		return '';		
+		return '{}';		
 	}
 
-	public function getRandomOrgaoEs($gastos)
+	private function getRandomOrgaoEs($gastos)
 	{
 		$total = count($gastos);
 		$randomKey = rand(0, $total-1);
 		return $gastos[$randomKey]->strNomeUnidadeGestora ? : "";
 	}
+
+    private function getTweet($term)
+    {
+    	if($term) {
+	        $tweet = $this->searchTwitter($term);
+	        return ($tweet) ? $tweet:"{}";
+    	}
+    	return "{}";
+    }
+
+    private function searchTwitter($term)
+    {    	
+    	$tweet["term"] = $term;
+        try {
+            $conn = new TwitterOAuth($this->twiiterApp["key"], $this->twiiterApp["secret"], $this->twiiterApp["oauth_token"], $this->twiiterApp["oauth_token_secret"]);
+            $params = ['q' => $term,
+                'count' => 1,
+                'tweet_mode'=>'extended',
+                'result_type'=>'recent',
+                'locale' => 'pt'
+            ];
+            if($conn) {
+                $response = $conn->get('search/tweets', $params);
+                if($response && count($response->statuses) > 0) {
+                    $tweet["text"] = $response->statuses[0]->full_text;
+                    $tweet["user"] = "@".$response->statuses[0]->user->name;
+                }
+            }
+            return $tweet;
+        } catch(Exception $e) {
+        	return $tweet;
+        }  
+    }
 
 	private function paginateEs($gastos, $pg, $ano)
 	{
@@ -70,9 +104,9 @@ class GastosController extends Controller
 		$totalPg = ceil($total/10);
 		if($pg <= $totalPg) {
 			$gastosNew["total"] = $total;
-			$gastosNew["ano"] = "$ano";
+			$gastosNew["ano"] = $ano;
 			$gastosNew["totalPg"] = $totalPg;
-			$gastosNew["curPg"] = "$pg";
+			$gastosNew["curPg"] = intval($pg);
 			$offset = ($pg-1)*10;
 			$length = 10;
 			$orgaos = array_slice($gastos, $offset, $length, true);

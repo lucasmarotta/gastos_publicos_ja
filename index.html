@@ -20,7 +20,7 @@
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/#page-top">
-					<img src="assets/img/logo.png" alt="Obras Públicas Já" class="img-responsive" width="336" height="34">
+					<img src="assets/img/logo.png" alt="Obras Públicas Já" class="img-responsive" width="336" height="35">
 				</a>
 			</div>
 	        <ul class="navbar-nav">
@@ -46,33 +46,26 @@
 			<div class="container">
 				<div>
 					<img src="assets/img/logo.png" alt="Obras Públicas Já" class="img-responsive">
-		            <p>Acompanhe, comente, cobre<br>os gastos públicos de seu estado</p>
+		            <p>Exija dados abertos e <br> acompanhe os gastos públicos de seu estado</p>
 				</div>
 		        <form class="state-search" method="GET">
 		            <div class="input-group">
-		                <span class="input-group-icon br-brasil"></span>
 		                <input class="input-group-field" type="text" name="estado" placeholder="Um estado">
+		                <span class="input-group-icon vue-magnifier btn-search"></span>
 		            </div>
 		        </form>
 			</div>
 		</header>
 
-		<section class="obra-section">
+		<section class="gastos-section">
 		    <div class="container">
-		        
 		        <div class="section-title">
-		            <h2>Mais Vistas</h2>
+		            <h2>Últimos Gastos</h2>
 		            <div class="section-title-icon">
-		                <hr><span class="vue-star"></span><hr>
+		                <hr><span class="vue-hourglass"></span><hr>
 		            </div>
 		        </div>
-					
-				<div class="row-box gastos">
-					
-					
-
-				</div>
-
+				<div class="row-box gastos"></div>
 		    </div>
 		</section>
 
@@ -390,13 +383,13 @@
 	                </ul>
 	            </div>
 	            <div class="footer-about">
-	                <h3>Sobre Gastos Públicos Já</h3>
-	                <p>Nossa missão é organizar informações de obras públicas contectando o cidadão nas redes sociais com o governo.</p>
+	                <h3>Sobre Dados Abertos Já</h3>
+	                <p>Nossa missão é organizar informações das despesas públicas conectando o cidadão nas redes sociais com o governo.</p>
 	            </div>
 			</div>
 		</section>
 		<section class="footer-copyright">
-			<div class="container footer-year">Copyright &copy; Gastos Públicos Já</div>
+			<div class="container footer-year">Copyright &copy; Dados Abertos Já</div>
 		</section>
 	    <!--
 	        <div class="scroll-top page-scroll visible-xs visible-sm">
@@ -407,8 +400,8 @@
 	</footer>
 	<!-- FOOTER -->
 
-
-    <div class="obra-container gastos-model">
+	<!-- OBRA-MODEL -->
+    <div class="gastos-container gastos-model">
         <div class="obra-uf">
             <span class="br-uf" data-bindName="gastos-uf" data-bindReplace="class"></span>
         </div>
@@ -420,6 +413,7 @@
             <p class="obra-value numeric" data-bindName="gastos-pago" data-bindReplace="html"></p>
         </div>
     </div>
+    <!-- OBRAL MODEL -->
 
 	<script src="assets/js/jraw.js"></script>
 	<script src="assets/js/main.js"></script>

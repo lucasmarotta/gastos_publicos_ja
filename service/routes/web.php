@@ -12,5 +12,6 @@
 */
 
 $app->get('twitter', 'TwitterController@index');
+$app->get('gastos', 'GastosController@index');
 $app->get('gastos/es', 'GastosController@es');
-$app->get('gastos/random', 'GastosController@random');
+$app->get('gastos/randomTweet', 'GastosController@randomTweet');
