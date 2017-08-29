@@ -5,13 +5,13 @@
 $(function(){
 
     var footerYear = $(".footer-year"),
-        timer = null,
         gastosModel = $(".gastos-model"),
         gastosSection = $(".gastos-section"),
         tweet = $(".tweet"),
         gastos = $(".gastos"),
         brasilMap = $(".brasil-map"),
         socialSection = $(".social-section"),
+        ufAtual = null,
         inputSearch = $(".state-search input"),
         estados = {
             ac:["acre", "ac"],
@@ -43,20 +43,21 @@ $(function(){
         };
 
     setIpInfo();
+    loadBrasilMap();
 
     $(".btn-search").click(function(){
         var uf = checkUf(inputSearch.val().toLowerCase());
         if(uf != null) {
+            ufAtual = uf;
             gastosSection.show();
-            socialSection.hide();
-            if(timer != null) clearInterval(timer);
             gastosSection.append("<div class='loading'></div>");
-            loadGastos("http://localhost:8000/gastos/"+uf+"?pg=1&ano=2017", loadBrasilMap);
-
+            loadGastos("http://localhost:8000/gastos/"+uf+"?pg=1&ano=2017");
+        } else {
+            alert("Digite um estado válido");
         }
     });
 
-    function loadGastos(url, callback)
+    function loadGastos(url)
     {
         $.getJSON({url:url,
             success: function(response) {
@@ -65,16 +66,15 @@ $(function(){
                 response.gastos.forEach(function(item, index){
                     var newGastos = gastosModel.clone();
                     newGastos.bindValue("url","detalhes.html");
-                    newGastos.bindValue("gastos-uf","br-uf-es");
+                    newGastos.bindValue("gastos-uf","br-uf-"+ufAtual);
                     newGastos.bindValue("gastos-orgao", item.orgao);
-                    newGastos.bindValue("gastos-estado-nome", "Espírio Santo");
+                    newGastos.bindValue("gastos-estado-nome", estados[ufAtual][0]);
                     newGastos.bindValue("gastos-empenhado", "Empenhado R$"+item.empenhado);
                     newGastos.bindValue("gastos-pago", "Pago R$"+item.pago);
                     newGastos.bindValue("gastos-liquido", "Líquido R$"+item.liquido);
                     gastos.append(newGastos.show().get(0));
                 });
                 mapLinks(response, "http://localhost:8000/gastos/es");
-                if(callback) callback();
             },
             fail: function (response) {
                 gastosSection.find(".loading").remove();
@@ -129,9 +129,10 @@ $(function(){
                 cache: false,
                 success: function(response) {
                     if(response.user) {
-                        console.info("Tweet com termo: "+response.term+" foi encontrado!");
-                        socialSection.show();
-                        var estado =  brasilMap.find("#uf-es");
+                        console.info("Tweet com termo: "+response.term+" do uf "+response.uf+" foi encontrado!");
+                        brasilMap.show().find(".highlight-uf").removeClass("highlight-uf");
+                        socialSection.find(".loading").remove();
+                        var estado =  brasilMap.find("#uf-"+response.uf);
                         var dim = estado.getDimension();
                         estado.addClass("highlight-uf");
                         tweet.bindValue("tweet-user",response.user);
@@ -146,15 +147,16 @@ $(function(){
                             tweet.setPosition(position);
                         },50);
                     } else {
-                        console.warn("Não foi possível obter o tweet com o termo: "+response.term);
+                        console.warn("Não foi possível obter o tweet com o termo: "+response.term+" do uf "+response.uf);
                     }
                 },
                 fail: function() {
+                    socialSection.find(".loading").remove();
                     console.warn("Não foi possível obter tweet randômico");
                 }
         };
-
-        timer = setInterval(function(){
+        $.getJSON(randomOrgaoRequest);
+        setInterval(function(){
             $.getJSON(randomOrgaoRequest);
         },15*1000);
     }

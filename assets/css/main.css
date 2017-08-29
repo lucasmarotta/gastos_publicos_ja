@@ -575,6 +575,9 @@ footer .footer-copyright {
 .gastos-container .obra-social-counter {
   font-size: 19px;
 }
+.brasil-map {
+  display: none;
+}
 .brasil-map svg {
   max-width: 60%;
   margin: 0 auto;
@@ -731,7 +734,6 @@ header .state-search .btn-search {
 .social-section {
   background: #F7FFFF url("../img/social_media.jpg");
   background-size: 1500px 1498px;
-  display: none;
 }
 /* ==========================================================================
     OBRA
